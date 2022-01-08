@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<canvas id="demo01" width="500" height="500"></canvas>
+	<script type="text/javascript">
+		"use strict";
+		// 1.找到画布对象
+		let canvas1 = document.querySelector('#demo01');
+		// 2.上下文对象(画笔）)
+		let ctx = canvas1.getContext('2d');
+		// 3.绘制路径
+		ctx.rect(100,100,200,200);
+		// 4.填充
+		ctx.fillStyle = "royalblue";//设置颜色
+		ctx.fill();
+		
+		// 5.描边.渲染路径
+		ctx.lineWidth = 5;
+		ctx.strokeStyle="coral";
+		ctx.stroke();
+	</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<canvas id="demo01" width="600" height="600"></canvas>
+		
+		<script type="text/javascript">
+			let canvas1 = document.getElementById('demo01');
+			let ctx = canvas1.getContext('2d');
+			
+			// 绘制图像
+			// ctx.drawImage(图像位置,x位置,y位置)
+			// ctx.drawImage(图像位置,x位置,y位置,宽带,高度)
+			// ctx.drawImage(图像位置,图像裁剪的位置x,图书裁剪y的位置,裁剪宽度,裁剪高度,x位置,y位置,宽带,高度)
+			let img = new Image();
+			
+			img.src="image/postgraduate.png";
+		
+			img.onload=()=>{
+				ctx.drawImage(img,100,50,150,150); 
+			}
+			let img1 = new Image();
+			img1.src="https://wiki.connect.qq.com/wp-content/uploads/2013/10/03_qq_symbol-1-853x1024.png";
+			
+			img1.onload=()=>{
+				ctx.drawImage(img1,0,50,50,64); 
+			}
+		</script>
+	</body>
+</html>

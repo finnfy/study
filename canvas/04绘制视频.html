@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<canvas id="demo01" width="800" height="600"></canvas>
+		<video width="800" height="600" src="image/develop.mp4" controls="controls">
+		</video>
+		<script type="text/javascript">
+			let canvas1 = document.getElementById('demo01');
+			let ctx = canvas1.getContext('2d');
+			
+			let video = document.querySelector("video");
+			 
+			 var interId = null;
+			 video.onplay = function(){
+				 interId=setInterval(function(){
+					 ctx.clearRect(0,0,800,600);
+					 ctx.fillRect(0,0,800,600);
+					 ctx.drawImage(video,0,70,800,400);
+					 
+					 ctx.font="20px 微软雅黑";
+					 ctx.strokeStyle="orange";
+					 ctx.strokeText("飛宇",50,50)
+				 },16);
+			 }
+			 video.onpause = function(){
+				 if(null != interId){
+					 clearInterval(interId);
+				 }
+			 }
+		</script>
+	</body>
+</html>
