@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
+<body>
+	<canvas id="canvas" width="800" height="600"></canvas>
+	
+	<script type="text/javascript">
+			let canvas = document.querySelector('#canvas');
+			let ctx = canvas.getContext('2d');
+			
+			// 第一个目标矩形图像
+			ctx.fillStyle="orangered";
+			ctx.fillRect(100,100,200,200);
+			
+			ctx.globalCompositeOperation= "lighter";//显示源图像 + 目标图像。
+			
+			// 第二个源矩形图像
+			ctx.fillStyle="lightblue";
+			ctx.fillRect(200,200,200,200);
+	</script>
+</body>
+</html>

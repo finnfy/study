@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>刮刮卡</title>
+<style type="text/css">
+	*{margin: 0;padding: 0;}
+	#container,#info,#canvas{width: 300px;height: 100px;}
+	#container{position: relative;}
+	#info,#canvas{position: absolute;left: 0;top: 0;}
+	#info{
+		display: flex;flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		font-size: 25px;
+		letter-spacing: 1.2em;
+	}
+</style>
+</head>
+<body>
+	<div id="container">
+		<div id="info"></div>
+		<canvas id="canvas" width="300" height="100"></canvas>
+	</div>
+	<button type="button" onclick="start()">再来一次</button>
+	
+	<script type="text/javascript">
+		function $(el){
+			return document.querySelectorAll(el);
+		}
+		// let award = [
+		// 	'谢谢惠顾','安慰奖','再来一次','一等奖'
+		// ]
+		let award = [
+			{content:'一等奖',prob:0.1},{content:'二等奖',prob:0.12},{content:'三等奖',prob:0.13},
+			{content:'安慰奖',prob:0.23},{content:'谢谢惠顾'}
+		];
+		let container = $('#container')[0];//容器
+		let info = $('#info')[0];//中奖信息
+		let canvas = $('#canvas')[0];
+		let ctx = canvas.getContext('2d');
+		
+		function start(){
+			let rand = Math.random();
+			if(rand<award[0].prob){
+				info.innerHTML=award[0].content;
+			}else if(rand<award[0].prob+award[1].prob){
+				info.innerHTML=award[1].content;
+			}else if(rand<award[0].prob+award[1].prob+award[2].prob){
+				info.innerHTML=award[2].content;
+			}else if(rand<award[0].prob+award[1].prob+award[2].prob+award[3].prob){
+				info.innerHTML=award[3].content;
+			}else{info.innerHTML=award[4].content;}
+			
+			
+			ctx.globalCompositeOperation="source-over";
+			ctx.beginPath();
+			ctx.fillStyle="darkgrey";
+			ctx.fillRect(0,0,300,100);
+			ctx.font="20px 楷体"
+			ctx.fillStyle="#fff";
+			ctx.textAlign="center"
+			ctx.fillText('请轻轻刮开',150,50);
+			ctx.closePath();
+		}
+		
+		start();
+		
+		let isFlag = false;
+		
+		canvas.onmousedown = function(){
+			isFlag = true;
+		}
+		
+		// 滑动进行监听
+		canvas.onmousemove = function(e){
+			if(isFlag){
+				ctx.beginPath();
+				ctx.globalCompositeOperation="destination-out";// 在源图像外显示目标图像。只有源图像外的目标图像部分会被显示，源图像是透明的。
+				let x = e.pageX - container.offsetTop ,y=e.pageY - container.offsetLeft;
+				ctx.arc(x,y,5,0,Math.PI*2);
+				ctx.fill();
+				ctx.closePath();
+			}
+		}
+		
+		canvas.onmouseup = function(){
+			isFlag = false;
+		}
+		
+		
+	</script>
+</body>
+</html>
