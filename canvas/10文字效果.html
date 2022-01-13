@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>文字效果</title>
+</head>
+<body>
+	<canvas id="canvas" width="600" height="600"></canvas>
+	<script type="text/javascript">
+		let canvas = document.getElementById('canvas');
+		let ctx  = canvas.getContext('2d');
+		
+		ctx.save();
+		ctx.beginPath();
+		ctx.moveTo(30,80);
+		ctx.lineTo(500,80);
+		ctx.setLineDash([10])
+		ctx.stroke();
+		ctx.closePath();
+		
+		ctx.font="24px 楷体";
+		// textBaseline 垂直对齐方式
+		
+		ctx.beginPath();
+		// 上对齐
+		ctx.textBaseline="top";
+		ctx.fillText('top',80,80);
+		
+		//垂直居中对齐
+		ctx.textBaseline="middle";
+		ctx.fillText('middle',150,80);
+		
+		//下对齐
+		ctx.textBaseline="bottom";
+		ctx.fillText('bottom',250,80);
+		
+		//标准字母基线对齐,默认
+		ctx.textBaseline="alphabatic";
+		ctx.fillText('alphabatic',350,80);
+		ctx.closePath();
+		ctx.restore();
+		
+		ctx.save();
+		ctx.beginPath();
+		ctx.moveTo(530,80);
+		ctx.lineTo(530,400);
+		ctx.setLineDash([10])
+		ctx.stroke();
+		ctx.closePath();
+		
+		ctx.font="24px 楷体";
+		// textAlign 水平对齐方式
+		ctx.beginPath();
+		//文字起始对齐,默认
+		ctx.textAlign="start";
+		ctx.fillText('start',530,100);
+		
+		//文字结束对齐
+		ctx.textAlign="end";
+		ctx.fillText('end',530,150);
+		
+		//文字左对齐
+		ctx.textAlign="left";
+		ctx.fillText('left',530,200);
+		
+		//文字右对齐
+		ctx.textAlign="right";
+		ctx.fillText('right',530,250);
+		
+		//文字居中对齐
+		ctx.textAlign="center";
+		ctx.fillText('center',530,300);
+		ctx.closePath();
+		
+		
+		ctx.restore();
+		ctx.save();
+		
+		
+		let [x,y]=[50,200];
+		let text = '飛宇学习';
+		// 文字属性
+		ctx.font="bold 80px arial";
+		
+		let {width} = ctx.measureText(text);
+		console.log(width)
+		
+		
+		// 投影
+		ctx.shadowColor='rgba(0,0,0,0.6)';
+		ctx.shadowOffsetY=2;
+		ctx.shadowOffsetX=2;
+		ctx.shadowBlur=4;
+		
+		// 填充文字
+		ctx.fillStyle="aqua";
+		ctx.fillText(text,x,y);
+		
+		// 实线描边
+		ctx.strokeStyle="magenta";
+		ctx.strokeText(text,x,y);
+		
+		// 虚线描边
+		ctx.setLineDash([5,3]);
+		ctx.lineWidth=2;
+		ctx.strokeStyle="paleturquoise";
+		ctx.strokeText(text,x,y);
+		
+	</script>
+</body>
+</html>
