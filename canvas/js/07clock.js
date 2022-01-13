@@ -108,7 +108,7 @@ window.onload = function(){
 		
 		// 分钟
 		let minuteRotate = (-Math.PI/30*13 + Math.PI/180) + Math.PI/30*time[1] + 2*Math.PI/3600*time[2];
-		centerRotateImage(move/2+200-4,move/2+200-4,minuteRotate,minuteImg,minuteImg.width+move,minuteImg.height+move);
+		centerRotateImage(move/2+200,move/2+200,minuteRotate,minuteImg,minuteImg.width+move,minuteImg.height+move);
 		
 		// 底部
 		centerRotateImage(move/2+200-4,move/2+200-4,0,circleBottomImg,circleBottomImg.width+move,circleBottomImg.height+move);

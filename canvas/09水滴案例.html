@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>09水滴案例</title>
+</head>
+<body>
+<canvas id="curve" width="600" height="600"></canvas>
+<script type="text/javascript">
+	let curve = document.getElementById('curve');
+	let ctx  = curve.getContext('2d');
+	
+	// 改变坐标轴
+	ctx.translate(450,450);
+	
+	ctx.beginPath();
+	
+	ctx.moveTo(0,0);
+	// 右边二次贝塞尔曲线
+	ctx.quadraticCurveTo(100,-100,100,-200);
+	// 上半圆
+	ctx.arc(0,-200,100,0,Math.PI,true);
+	// 左边边二次贝塞尔曲线
+	ctx.quadraticCurveTo(-100,-100,0,0);
+	
+	ctx.strokeStyle="darkturquoise";
+	ctx.fillStyle="paleturquoise"
+	ctx.fill();
+	ctx.stroke();
+	ctx.closePath();
+		
+</script>
+</body>
+</html>
