@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>13弹性运动升级版</title>
+  <style>
+    *{margin: 0;padding: 0;box-sizing: border-box;overflow: hidden;}
+  </style>
+</head>
+<body>
+  <canvas id="canvas" ></canvas>
+<script>
+  let canvas = document.getElementById('canvas');
+  const [width,height] = [window.innerWidth,window.innerHeight];
+  canvas.setAttribute('width',width);
+  canvas.setAttribute('height',height);
+  let ctx = canvas.getContext('2d');
+
+
+  class B {
+    constructor(r=30,color="#edd2cb") {
+      this.r=r;
+      this.color=color;
+      this.x=0;
+      this.y=0
+    }
+    draw(ctx){
+      ctx.save();
+      ctx.beginPath();
+      ctx.strokeStyle=this.color;
+      ctx.fillStyle=this.color;
+      ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+      ctx.stroke();
+      ctx.fill();
+      ctx.closePath();
+      ctx.restore();
+    }
+  }
+
+  //弹性运动
+  let a = new B();
+  a.x = width/2;
+  a.y=a.r*2.2 ;
+
+  // 速度毫秒
+  let lx = 0.1;
+  let ly = 0.1;
+
+  // 重力 gravity
+  const gravity=0.01;
+
+  // 弹力
+  let bounce = 0.8;
+  let time = new Date();
+
+  !(function render(){
+    ctx.clearRect(0,0,width,height);
+    let now = new Date();
+    let diff = now - time;
+    time = now;
+
+    ly += gravity;
+    a.y += ly * diff;
+    a.x += lx * diff;
+
+    // 底部
+    if(a.y+a.r>height){
+      a.y = height - a.r;
+      ly *= -bounce;
+    }
+    // 右侧
+    if(a.x+a.r>width){
+      a.x = width - a.r;
+      lx *= -bounce;
+    }
+    // 左侧
+    if(a.x-a.r<0){
+      a.x =  a.r;
+      lx *= -bounce;
+    }
+
+    a.draw(ctx);
+    requestAnimationFrame(render)
+  })();
+
+
+  window.addEventListener("visibilitychange",()=>{
+    time=new Date();
+  })
+
+</script>
+</body>
+</html>

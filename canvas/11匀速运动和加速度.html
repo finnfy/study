@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>11匀速运动和加速度</title>
+  <style>
+    *{margin: 0;padding: 0;box-sizing: border-box;overflow: hidden;}
+  </style>
+</head>
+<body>
+  <canvas id="canvas" ></canvas>
+<script>
+  let canvas = document.getElementById('canvas');
+  const [width,height] = [window.innerWidth,window.innerHeight];
+  canvas.setAttribute('width',width);
+  canvas.setAttribute('height',height);
+  let ctx = canvas.getContext('2d');
+
+
+  class B {
+    constructor(r=30,color="#edd2cb") {
+      this.r=r;
+      this.color=color;
+      this.x=0;
+      this.y=0
+    }
+    draw(ctx){
+      ctx.save();
+      ctx.beginPath();
+      if(this.y>height*1.1){
+        this.y=this.r*2;
+      }
+      ctx.strokeStyle=this.color;
+      ctx.fillStyle=this.color;
+      ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+      ctx.stroke();
+      ctx.fill();
+      ctx.closePath();
+      ctx.restore();
+    }
+  }
+
+  //匀速速度球
+  let a = new B();
+  //加速速度球
+  let b = new B(25,'#f55951');
+  a.x=width/3;
+  a.y=a.r*2.2;
+
+  b.x=width/3*2;
+  b.y=b.r*2.2;
+
+  // 匀速速度
+  let speed_v = 0.05;
+
+  let k = 1;
+
+  //加速度
+  let as = 0.01;
+
+  let time = new Date();
+
+  !(function render(){
+    ctx.clearRect(0,0,width,height);
+    let now = new Date();
+    let diff = now - time;
+    time = now;
+
+    a.y += speed_v*diff;
+
+
+    b.y += (speed_v+as*k)*diff;
+
+    k++;
+    a.draw(ctx);
+    b.draw(ctx);
+    requestAnimationFrame(render)
+  })();
+
+</script>
+</body>
+</html>

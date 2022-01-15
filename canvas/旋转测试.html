@@ -13,8 +13,7 @@
 		ctx.save();
 		
 		ctx.translate(200,200);
-		ctx.rotate(-Math.PI/2)
-		
+		ctx.rotate(-Math.PI/2);
 		
 		ctx.save();
 		
@@ -32,12 +31,22 @@
 		ctx.beginPath();
 		ctx.translate(100,0);
 		ctx.rotate(Math.PI/2);
-		ctx.fillText('周飞宇',0);
+		ctx.fillText('周飞宇',0,0);
 		// ctx.strokeText('周飞宇',100,0);
 		
 		ctx.stroke();
 		ctx.closePath();
-		
+
+
+		//requestAnimationFrame
+		(function render(){
+			// console.log(Date.now())
+			requestAnimationFrame(render);
+		})()
+
+		window.addEventListener("visibilitychange",function (){
+			console.log(document.visibilityState)
+		});
 		
 	</script>
 </body>
